@@ -46,13 +46,12 @@ Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die Datei [LICENSE](LI
 
 ---
 
-### 4. **Lizenz (optional)**
-Falls du möchtest, kannst du eine Lizenzdatei hinzufügen. Für Open-Source-Projekte ist die **MIT-Lizenz** einfach und weit verbreitet:
+### 4. **Lizenz**
 
 ```plaintext
 MIT License
 
-Copyright (c) 2024 Dein Name
+Copyright (c) 2024 N3M3S1Spy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
