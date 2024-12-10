@@ -16,4 +16,4 @@ BatteryTimeTracker ist ein C++-Programm, das die Laufzeit eines Laptops protokol
 ## Installation
 1. Klone das Repository:
    ```bash
-   git clone https://github.com/dein-benutzername/BatteryTimeTracker.git
+   git clone https://github.com/N3M3S1Spy/BatteryTimeTracker.git
