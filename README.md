@@ -70,5 +70,3 @@ Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die Datei [LICENSE](LI
    ```
 
 ---
-
-Soll ich dir bei einem der Schritte genauer helfen?
