@@ -4,7 +4,8 @@
 #include <thread>
 #include <string>
 #include <sstream>
-#include <cstdlib>  // Für system() und popen()
+#include <iomanip>
+#include <windows.h> // Für windows.h und die Akkuüberprüfung
 
 const std::string FILENAME = "battery_time.txt";
 
@@ -12,9 +13,7 @@ const std::string FILENAME = "battery_time.txt";
 std::string formatTime(time_t rawTime) {
     char buffer[80];
     struct tm timeInfo;
-    
-    // Verwendung von localtime_r für plattformübergreifende Kompatibilität
-    localtime_r(&rawTime, &timeInfo); // Safe Variante für plattformübergreifende Verwendung
+    localtime_s(&timeInfo, &rawTime); // Sichere Variante auf Windows
 
     strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", &timeInfo);
     return std::string(buffer);
@@ -53,31 +52,13 @@ void loadTimes(std::string& startTime, std::string& endTime, std::string& durati
     }
 }
 
-// Funktion, um den Akkustand zu überprüfen (Windows ohne windows.h)
+// Funktion, um den Akkustand mit Windows-API zu überprüfen
 int getBatteryPercentage() {
-    // Kommando zur Abfrage des Akkustands mit WMIC
-    FILE* fp = popen("wmic path win32_battery get estimatedchargeremaining", "r");
-    if (fp == nullptr) {
-        std::cerr << "Fehler beim Abrufen des Akkustands!" << std::endl;
-        return -1;
+    SYSTEM_POWER_STATUS status;
+    if (GetSystemPowerStatus(&status)) {
+        return status.BatteryLifePercent;  // Gibt den Akkustand in Prozent zurück
     }
-
-    char buffer[128];
-    std::string result;
-    while (fgets(buffer, sizeof(buffer), fp) != nullptr) {
-        result += buffer;
-    }
-
-    fclose(fp);
-
-    // Die Ausgabe enthält den Akkustand in der zweiten Zeile
-    size_t pos = result.find("\n");
-    if (pos != std::string::npos) {
-        std::string batteryPercentStr = result.substr(pos + 1);
-        return std::stoi(batteryPercentStr);
-    }
-
-    return -1;  // Fehler, falls der Akkustand nicht extrahiert werden konnte
+    return -1;  // Fehler
 }
 
 int main() {
@@ -113,7 +94,7 @@ int main() {
         std::cout << "Laufzeit: " << duration << std::endl;
         std::cout << "Akkustand: " << batteryPercent << "%" << std::endl;
 
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::seconds(1));  // 1 Sekunde warten
     }
 
     return 0;
