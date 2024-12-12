@@ -12,7 +12,9 @@ const std::string FILENAME = "battery_time.txt";
 std::string formatTime(time_t rawTime) {
     char buffer[80];
     struct tm timeInfo;
-    localtime_s(&timeInfo, &rawTime); // Sichere Variante
+    
+    // Verwendung von localtime_r für plattformübergreifende Kompatibilität
+    localtime_r(&rawTime, &timeInfo); // Safe Variante für plattformübergreifende Verwendung
 
     strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", &timeInfo);
     return std::string(buffer);
