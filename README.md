@@ -42,31 +42,3 @@ Gesamtlaufzeit: 1 Stunde und 30 Minuten
 
 ## Lizenz
 Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die Datei [LICENSE](LICENSE) für Details.
-
----
-
-### 5. **Hochladen zu GitHub**
-1. Initialisiere dein Repository:
-   ```bash
-   git init
-   ```
-2. Füge die Dateien hinzu:
-   ```bash
-   git add .
-   ```
-3. Committe die Änderungen:
-   ```bash
-   git commit -m "Initial commit"
-   ```
-4. Erstelle ein Repository auf GitHub:
-   - Gehe auf [GitHub](https://github.com) und erstelle ein neues Repository mit dem Namen `BatteryTimeTracker`.
-5. Verknüpfe dein lokales Repository mit GitHub:
-   ```bash
-   git remote add origin https://github.com/N3M3S1Spy/BatteryTimeTracker.git
-   ```
-6. Lade die Dateien hoch:
-   ```bash
-   git push -u origin main
-   ```
-
----
